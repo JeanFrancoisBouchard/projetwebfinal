@@ -1,5 +1,6 @@
 import app from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 
 const config = {
     apiKey: "AIzaSyA6bdp6zvamUTPebw6aCrj-WCNsY6Bl_3I",
@@ -10,25 +11,35 @@ const config = {
     messagingSenderId: "888526341491"
 }
 
+
 class Firebase {
     constructor() {
-        app.initializeApp(config);
-
-        this.auth = app.auth();
+      app.initializeApp(config);
+  
+      this.auth = app.auth();
+      this.db = app.database();
     }
-
+  
+    // *** Auth API ***
+  
     doCreateUserWithEmailAndPassword = (email, password) =>
-        this.auth.createUserWithEmailAndPassword(email, password);
-
+      this.auth.createUserWithEmailAndPassword(email, password);
+  
     doSignInWithEmailAndPassword = (email, password) =>
-        this.auth.signInWithEmailAndPassword(email, password);
-
+      this.auth.signInWithEmailAndPassword(email, password);
+  
     doSignOut = () => this.auth.signOut();
-
+  
     doPasswordReset = email => this.auth.sendPasswordResetEmail(email);
-
-    doPasswordUpdate = password => 
-        this.auth.currentUser.updatePassword(password);
-}
-
-export default Firebase;
+  
+    doPasswordUpdate = password =>
+      this.auth.currentUser.updatePassword(password);
+  
+    // *** User API ***
+  
+    user = uid => this.db.ref(`users/${uid}`);
+  
+    users = () => this.db.ref('users');
+  }
+  
+  export default Firebase;
