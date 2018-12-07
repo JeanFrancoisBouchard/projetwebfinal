@@ -5,14 +5,23 @@ import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink} from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-
+import { Button, Container, Col, Card, CardImg, CardBody, CardTitle, Input } from 'reactstrap';
 const SignInPage = () => (
   <div>
-    <h1>SignIn</h1>
-    <SignInForm />
-    <PasswordForgetLink />
-    <SignUpLink />
-  </div>
+  <Container>
+    <Col sm="10" md={{ size: 8, offset: 2 }}>
+      <Card>
+        <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Logo" />
+        <CardBody>
+          <CardTitle>Connexion</CardTitle>
+          <SignInForm />
+          <PasswordForgetLink />
+          <SignUpLink />
+        </CardBody>
+      </Card>
+    </Col>
+  </Container>
+</div>
 );
 
 const INITIAL_STATE = {
@@ -54,23 +63,25 @@ class SignInFormBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <input
+        <Input
           name="email"
           value={email}
           onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
-        <input
+        <br />
+        <Input
           name="password"
           value={password}
           onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
-        <button disabled={isInvalid} type="submit">
-          Sign In
-        </button>
+        <br />
+        <Button disabled={isInvalid} type="submit">
+          Connexion
+        </Button>
 
         {error && <p>{error.message}</p>}
       </form>

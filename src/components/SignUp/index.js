@@ -3,10 +3,12 @@ import { Link, withRouter } from 'react-router-dom';
 
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
-
+import { Card, CardBody,CardTitle, 
+  Container, Col, Form, FormGroup, 
+  Label, Input, Button, Row 
+} from 'reactstrap';
 const SignUpPage = () => (
   <div>
-    <h1>SignUp</h1>
     <SignUpForm />
   </div>
 );
@@ -70,39 +72,78 @@ class SignUpFormBase extends Component {
       username === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="username"
-          value={username}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Full Name"
-        />
-        <input
-          name="email"
-          value={email}
-          onChange={this.onChange}
-          type="text"
-          placeholder="Email Address"
-        />
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Password"
-        />
-        <input
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Confirm Password"
-        />
-        <button disabled={isInvalid} type="submit">Sign Up</button>
-
-        {error && <p>{error.message}</p>}
-      </form>
+      <Container className="App">
+      <Card>
+        <CardTitle>
+          Création d'un compte
+        </CardTitle>
+        <CardBody>
+          <Form className="Form" onSubmit={this.onSubmit}>
+            <Row>
+              <Col>
+                <FormGroup>
+                  <Label>Nom complet :</Label>
+                  <Input
+                    name="username"
+                    value={username}
+                    onChange={this.onChange}
+                    type="text"
+                    placeholder="Entrez votre nom complet"
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <FormGroup>
+                  <Label>Adresse courriel :</Label>
+                  <Input
+                    name="email"
+                    value={email}
+                    onChange={this.onChange}
+                    type="text"
+                    placeholder="Entrez votre adresse courriel"
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col md={6}>
+                <FormGroup>
+                  <Label>Mot de passe :</Label>
+                  <Input
+                    name="passwordOne"
+                    value={passwordOne}
+                    onChange={this.onChange}
+                    type="password"
+                    placeholder="Entrez votre mot de passe"
+                  />
+                </FormGroup>
+              </Col>
+              <Col md={6}>
+                <FormGroup> 
+                  <Label>Confirmation du mot de passe :</Label>
+                  <Input
+                    name="passwordTwo"
+                    value={passwordTwo}
+                    onChange={this.onChange}
+                    type="password"
+                    placeholder="Entrez votre mot de passe"
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row>
+              <Col>
+                <Button color="primary" disabled={isInvalid} type="submit">Enregistrer</Button>
+                {error && <p>{error.message}</p>}
+                <br />
+              </Col>
+            </Row>
+          </Form>
+        </CardBody>
+      </Card>
+    </Container>
     );
   }
 }
