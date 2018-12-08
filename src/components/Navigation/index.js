@@ -4,7 +4,7 @@ import { withAuthorization } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
-import { Collapse, Navbar, NavbarBrand, 
+import { Button, Jumbotron, Collapse, Navbar, NavbarBrand, 
   NavbarToggler, Nav, NavItem, NavLink,
   UncontrolledDropdown, DropdownToggle,
   DropdownMenu, DropdownItem } from 'reactstrap';
@@ -29,42 +29,65 @@ class Navigation extends Component {
   render() {
     return(
       <div>
-        <Navbar color="faded" light>
-          <NavbarBrand href={ROUTES.LANDING} className="mr-auto">Ciné au 6863</NavbarBrand>
-          <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-          <Collapse isOpen={this.state.collapsed} navbar>
-            <AuthUserContext.Consumer>
-              {authUser =>
-                authUser ? <NavigationAuth /> : <NavigationNonAuth />
-              }
-            </AuthUserContext.Consumer>
-          </Collapse>
-        </Navbar>
+        <div>
+          <Jumbotron>
+            <h1>Ciné au 6863 !</h1>
+            <p>Pour voir les meilleurs films en ville ou les noix à Thom, c'est l'endroit parfait !</p>
+            <hr />
+            <p className="lead">
+                <Button color="primary" href={ROUTES.ABOUT}>Pour en savoir plus</Button>
+            </p>
+          </Jumbotron>
+        </div>
+        <AuthUserContext.Consumer>
+          {authUser =>
+            authUser ? <NavigationAuth /> : <NavigationNonAuth />
+          }
+        </AuthUserContext.Consumer>
       </div>
     );
   }
 }
 
 const NavigationAuth = () => (
-  <Nav>
-    <DropdownItem href={ROUTES.CHANGEPW}>
-      Changer votre mot de passe
-    </DropdownItem>
-    <DropdownItem href={ROUTES.ADMIN}>
-      Admin
-    </DropdownItem>
-    <DropdownItem>
-      <SignOutButton />
-    </DropdownItem>
-  </Nav>
+  <div>
+    <Navbar color="dark" dark expand="md">
+      <NavbarBrand href={ROUTES.LANDING}>Ciné au 6863 !</NavbarBrand>
+      <NavbarToggler onClick={this.toggle} />
+      <Collapse isOpen={this.state.isOpen} navbar>
+        <UncontrolledDropdown nav inNavbar>
+          <DropdownToggle nav caret>
+          Compte
+          </DropdownToggle>
+          <DropdownMenu right>
+          <DropdownItem>
+              Changer le mot de passe
+          </DropdownItem>
+          <DropdownItem divider />
+          <DropdownItem>
+              Déconnexion
+          </DropdownItem>
+          </DropdownMenu>
+        </UncontrolledDropdown>
+      </Collapse>
+    </Navbar>
+  </div>
 );
 
 const NavigationNonAuth = () => (
-  <Nav>
-    <DropdownItem href={ROUTES.SIGN_IN}>
-      Connexion
-    </DropdownItem>
-  </Nav>
+  <div>
+        <Navbar color="light" light expand="md">
+          <NavbarBrand href="/">Ciné au 6863</NavbarBrand>
+          <NavbarToggler/>
+          <Collapse navbar>
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink href={ROUTES.SIGN_IN}>Se connecter</NavLink>
+              </NavItem>
+            </Nav>
+          </Collapse>
+        </Navbar>
+      </div>
 );
 
 export default Navigation;

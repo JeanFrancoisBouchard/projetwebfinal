@@ -9,8 +9,9 @@ import LandingPage from '../Landing';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
 import PasswordForgetPage from '../PasswordForget';
-import HomePage from '../Home';
 import AccountPage from '../Account';
+import AboutPage from '../About';
+import HomePage from '../Home';
 import AdminPage from '../Admin';
 
 import * as ROUTES from '../../constants/routes';
@@ -29,6 +30,7 @@ const App = () => (
       <Route path={ROUTES.HOME} component={HomePage} />
       <Route path={ROUTES.CHANGEPW} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
+      <Route path={ROUTES.ABOUT} component={AboutPage} />
       </div>
   </Router>
 );

@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 import { withFirebase } from '../Firebase'
 import * as ROUTES from '../../constants/routes';
 import { Button, Card, CardBody, CardImg, CardText, Col, Input } from 'reactstrap';
+
 const PasswordForgetPage = () => (
   <div>
-    <h1>PasswordForget</h1>
     <PasswordForgetForm />
   </div>
 );
