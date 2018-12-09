@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-
 import { withFirebase } from '../Firebase';
+import { CardBody, Form, Row, Col, 
+  FormGroup, Label, Input, 
+  Button, Container, Card, CardTitle } from 'reactstrap';
 
 const INITIAL_STATE = {
   passwordOne: '',
@@ -26,7 +28,7 @@ class PasswordChangeForm extends Component {
       .catch(error => {
         this.setState({ error });
       });
-    
+    alert("Le mot de passe à bien été changé")
     event.preventDefault();
   };
 
@@ -40,29 +42,68 @@ class PasswordChangeForm extends Component {
     const isInvalid =
       passwordOne !== passwordTwo || passwordOne === '';
     
-    return (
-      <form onSubmit={this.onSubmit}>
-        <input
-          name="passwordOne"
-          value={passwordOne}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Mot de passe"
-        />
-        <input 
-          name="passwordTwo"
-          value={passwordTwo}
-          onChange={this.onChange}
-          type="password"
-          placeholder="Mot de passe"
-        />
-        <button disabled={isInvalid} type="submit">
-          Changer mon mot de passe
-        </button>
+      return (
+            <Form className="Form" onSubmit={this.onSubmit}>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label>Nouveau mot de passe :</Label>
+                    <Input
+                      name="passwordOne"
+                      value={passwordOne}
+                      onChange={this.onChange}
+                      type="password"
+                      placeholder="Nouveau mot de passe"
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <FormGroup>
+                    <Label>Confirmation :</Label>
+                    <Input
+                      name="passwordTwo"
+                      value={passwordTwo}
+                      onChange={this.onChange}
+                      type="password"
+                      placeholder="Confirmez le mot de passe"
+                    />
+                  </FormGroup>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <Button color="primary" disabled={isInvalid} type="submit">Enregistrer</Button>
+                  {error && <p>{error.message}</p>}
+                  <br />
+                </Col>
+              </Row>
+            </Form>
+      );
+    // return (
+    //   <form onSubmit={this.onSubmit}>
+    //     <input
+    //       name="passwordOne"
+    //       value={passwordOne}
+    //       onChange={this.onChange}
+    //       type="password"
+    //       placeholder="Mot de passe"
+    //     />
+    //     <input 
+    //       name="passwordTwo"
+    //       value={passwordTwo}
+    //       onChange={this.onChange}
+    //       type="password"
+    //       placeholder="Mot de passe"
+    //     />
+    //     <button disabled={isInvalid} type="submit">
+    //       Changer mon mot de passe
+    //     </button>
 
-        {error && <p>{error.message}</p>}
-      </form>
-    );
+    //     {error && <p>{error.message}</p>}
+    //   </form>
+    // );
   }
 }
 

@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { withAuthorization } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
+import * as ROLES from '../../constants/roles';
 import { AuthUserContext } from '../Session';
 import { Button, Jumbotron, Collapse, Navbar, NavbarBrand, 
   NavbarToggler, Nav, NavItem, NavLink,
@@ -22,10 +21,43 @@ class Navigation extends Component {
 
   toggleNavbar() {
     this.setState ({
-      isOpen: !this.state.isOpen
+      collapsed: !this.state.collapsed
     });
   }
-  
+
+  NavigationNonAuth = () => (
+    <Nav className="ml-auto" navbar>
+      <NavItem>
+        <NavLink href={ROUTES.SIGN_IN}>Se connecter</NavLink>
+      </NavItem>
+    </Nav>
+  );
+
+  NavigationAuth = () => (
+    <Nav className="ml-auto" navbar>
+      <UncontrolledDropdown nav inNavbar>
+        <DropdownToggle nav caret>
+          Options
+        </DropdownToggle>
+        <DropdownMenu right>
+          <DropdownItem href={ROUTES.HOME}>
+            Compte utilisateur
+          </DropdownItem>
+          <DropdownItem href={ROUTES.CHANGEPW}>
+            Changer le mot de passe
+          </DropdownItem>
+          <AuthUserContext.Consumer>
+            {authUser =>
+              authUser.roles.includes(ROLES.ADMIN) ? <AdminLink /> : null
+            }
+          </AuthUserContext.Consumer>
+          <DropdownItem divider />
+          <SignOutButton />
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    </Nav>
+  );
+
   render() {
     return(
       <div>
@@ -39,53 +71,34 @@ class Navigation extends Component {
             </p>
           </Jumbotron>
         </div>
+<<<<<<< HEAD
         <AuthUserContext.Consumer>
           {authUser => authUser ? null : <NavigationNonAuth />}
         </AuthUserContext.Consumer>
+=======
+        <div>
+          <Navbar color="light" light expand="md">
+            <NavbarBrand href="/">Ciné au 6863</NavbarBrand>
+            <NavbarToggler onClick={this.toggleNavbar} />
+            <Collapse isOpen={this.state.collapsed} navbar>
+              <AuthUserContext.Consumer>
+                {authUser =>
+                  authUser ? this.NavigationAuth() : this.NavigationNonAuth()
+                }
+              </AuthUserContext.Consumer>
+            </Collapse>
+          </Navbar>
+        </div>
+>>>>>>> 022f0f27bb3be88428bdbc7ba63fd7d30c36a496
       </div>
     );
   }
 }
 
-const NavigationAuth = () => (
-  <div>
-    <Navbar color="dark" dark expand="md">
-      <NavbarBrand href={ROUTES.LANDING}>Ciné au 6863 !</NavbarBrand>
-      <NavbarToggler onClick={this.toggle} />
-      <Collapse isOpen={this.state.isOpen} navbar>
-        <UncontrolledDropdown nav inNavbar>
-          <DropdownToggle nav caret>
-          Compte
-          </DropdownToggle>
-          <DropdownMenu right>
-          <DropdownItem>
-              Changer le mot de passe
-          </DropdownItem>
-          <DropdownItem divider />
-          <DropdownItem>
-              Déconnexion
-          </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
-      </Collapse>
-    </Navbar>
-  </div>
-);
-
-const NavigationNonAuth = () => (
-  <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Ciné au 6863</NavbarBrand>
-          <NavbarToggler/>
-          <Collapse navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href={ROUTES.SIGN_IN}>Se connecter</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
-);
+const AdminLink = () => (
+  <DropdownItem href={ROUTES.ADMIN}>
+    Admin
+  </DropdownItem>
+)
 
 export default Navigation;
