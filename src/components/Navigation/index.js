@@ -71,11 +71,6 @@ class Navigation extends Component {
             </p>
           </Jumbotron>
         </div>
-<<<<<<< HEAD
-        <AuthUserContext.Consumer>
-          {authUser => authUser ? null : <NavigationNonAuth />}
-        </AuthUserContext.Consumer>
-=======
         <div>
           <Navbar color="light" light expand="md">
             <NavbarBrand href="/">Ciné au 6863</NavbarBrand>
@@ -89,7 +84,6 @@ class Navigation extends Component {
             </Collapse>
           </Navbar>
         </div>
->>>>>>> 022f0f27bb3be88428bdbc7ba63fd7d30c36a496
       </div>
     );
   }
