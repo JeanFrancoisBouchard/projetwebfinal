@@ -9,7 +9,7 @@ const AccountPage = () => (
     <Container className="App">
       <Card>
         <CardTitle>
-          Modifier le mot de passe de : {authUser.email}
+          Modifier le mot de passe de : {authUser.username}
         </CardTitle>
         <CardBody>
           <PasswordChangeForm />
