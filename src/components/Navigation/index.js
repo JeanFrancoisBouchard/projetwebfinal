@@ -40,9 +40,7 @@ class Navigation extends Component {
           </Jumbotron>
         </div>
         <AuthUserContext.Consumer>
-          {authUser =>
-            authUser ? <NavigationAuth /> : <NavigationNonAuth />
-          }
+          {authUser => authUser ? null : <NavigationNonAuth />}
         </AuthUserContext.Consumer>
       </div>
     );
