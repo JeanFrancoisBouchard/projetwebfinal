@@ -61,8 +61,8 @@ class MovieItem extends React.Component {
         return (
             <Row>
                 <Col sm="6" md={{ size: 6, offset: 3 }}>
-                    <Card inverse style={{ backgroundColor: '#333', borderColor: '#333' }}>
-                        <CardImg  style={{height: '700px', width: '100%'}} top width="100%" height="100%" src={this.props.image} alt="Movie poster" />
+                    <Card inverse style={{ backgroundColor: '#333', borderColor: '#333', width: "350px",  height: "100%"}}>
+                        <CardImg  style={{height: '300px', width: '100%'}} top width="100%" height="100%" src={this.props.image} alt="Movie poster" />
                         <CardBody>
                             <CardTitle tag="h3">{this.props.title}</CardTitle>
                             <CardSubtitle>{this.props.year}</CardSubtitle>
