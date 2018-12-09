@@ -33,7 +33,7 @@ class SignUpFormBase extends Component {
     const { username, email, passwordOne } = this.state;
     const roles = [];
     roles.push(ROLES.USER);
-
+    console.log(roles);
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
