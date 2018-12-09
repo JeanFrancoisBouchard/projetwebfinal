@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { withAuthorization } from '../Session';
 import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import { AuthUserContext } from '../Session';
@@ -22,7 +20,7 @@ class Navigation extends Component {
 
   toggleNavbar() {
     this.setState ({
-      isOpen: !this.state.isOpen
+      collapsed: !this.state.collapsed
     });
   }
   
@@ -39,55 +37,50 @@ class Navigation extends Component {
             </p>
           </Jumbotron>
         </div>
-        <AuthUserContext.Consumer>
-          {authUser =>
-            authUser ? <NavigationAuth /> : <NavigationNonAuth />
-          }
-        </AuthUserContext.Consumer>
+        <div>
+          <Navbar color="light" light expand="md">
+            <NavbarBrand href="/">Ciné au 6863</NavbarBrand>
+            <NavbarToggler onClick={this.toggleNavbar} />
+            <Collapse isOpen={this.state.collapsed} navbar>
+              <AuthUserContext.Consumer>
+                {authUser =>
+                  authUser ? <NavigationAuth /> : <NavigationNonAuth />
+                }
+              </AuthUserContext.Consumer>
+            </Collapse>
+          </Navbar>
+        </div>
       </div>
     );
   }
 }
 
 const NavigationAuth = () => (
-  <div>
-    <Navbar color="dark" dark expand="md">
-      <NavbarBrand href={ROUTES.LANDING}>Ciné au 6863 !</NavbarBrand>
-      <NavbarToggler onClick={this.toggle} />
-      <Collapse isOpen={this.state.isOpen} navbar>
-        <UncontrolledDropdown nav inNavbar>
-          <DropdownToggle nav caret>
-          Compte
-          </DropdownToggle>
-          <DropdownMenu right>
-          <DropdownItem>
-              Changer le mot de passe
+    <Nav className="ml-auto" navbar>
+      <UncontrolledDropdown nav inNavbar>
+        <DropdownToggle nav caret>
+          Options
+        </DropdownToggle>
+        <DropdownMenu right>
+          <DropdownItem href={ROUTES.HOME}>
+            Compte utilisateur
+          </DropdownItem>
+          <DropdownItem href={ROUTES.CHANGEPW}>
+            Changer le mot de passe
           </DropdownItem>
           <DropdownItem divider />
-          <DropdownItem>
-              Déconnexion
-          </DropdownItem>
-          </DropdownMenu>
-        </UncontrolledDropdown>
-      </Collapse>
-    </Navbar>
-  </div>
+          <SignOutButton />
+        </DropdownMenu>
+      </UncontrolledDropdown>
+    </Nav>
 );
 
 const NavigationNonAuth = () => (
-  <div>
-        <Navbar color="light" light expand="md">
-          <NavbarBrand href="/">Ciné au 6863</NavbarBrand>
-          <NavbarToggler/>
-          <Collapse navbar>
-            <Nav className="ml-auto" navbar>
-              <NavItem>
-                <NavLink href={ROUTES.SIGN_IN}>Se connecter</NavLink>
-              </NavItem>
-            </Nav>
-          </Collapse>
-        </Navbar>
-      </div>
+  <Nav className="ml-auto" navbar>
+    <NavItem>
+      <NavLink href={ROUTES.SIGN_IN}>Se connecter</NavLink>
+    </NavItem>
+  </Nav>
 );
 
 export default Navigation;
