@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { withFirebase } from '../Firebase';
-import { CardBody, Form, Row, Col, 
+import { Form, Row, Col, Button,
   FormGroup, Label, Input, 
-  Button, Container, Card, CardTitle } from 'reactstrap';
+  } from 'reactstrap';
 
 const INITIAL_STATE = {
   passwordOne: '',
