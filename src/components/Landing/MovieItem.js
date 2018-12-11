@@ -1,11 +1,11 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody,
-  CardTitle, CardSubtitle, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, CardFooter, Nav, NavItem, NavLink, TabContent, TabPane, Form, FormGroup, Label, Input } from 'reactstrap';
+  CardTitle, CardSubtitle, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, CardFooter, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
 
 import classnames from 'classnames';
-import StarRatings from 'react-star-ratings';
 
 import ReviewList from './ReviewList';
+import ReviewWriter from './ReviewWriter';
 
 let movieInfo = ({
     Title: "",
@@ -93,20 +93,10 @@ class MovieItem extends React.Component {
                         </Nav>
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
-                                <ReviewList />
+                                <ReviewList/>
                             </TabPane>
                             <TabPane tabId="2">
-                                <Form onSubmit={this.criticSubmission}>
-                                    <FormGroup>
-                                        <Label for="exampleText">Votre critique.</Label>
-                                        <Input type="textarea" name="text" id="exampleText" />
-                                    </FormGroup>
-                                    <FormGroup>
-                                        <Label for="starRating">Votre note : </Label>
-                                        <StarRatings rating={this.state.rating} starRatedColor="yellow" changeRating={this.changeRating} numberOfStars={5} name='starRating' starDimension="30px" starSpacing="10px"/>
-                                    </FormGroup>
-                                    <Button>Soumettre critique.</Button>
-                                </Form>
+                                <ReviewWriter  movieId={this.props.imdbID}/>
                             </TabPane>
                         </TabContent>
                         </CardFooter>

@@ -4,8 +4,6 @@ import $ from 'jquery';
 import _ from 'lodash';
 import StarRatings from 'react-star-ratings';
 
-let reviewList = [];
-let test;
 
 class ReviewList extends React.Component {
     constructor(props) {
@@ -54,8 +52,6 @@ class ReviewList extends React.Component {
                 self.setState({reviews, avgRating});
             },
             error: function() {
-                test = "allo";
-                console.log(test);
                 let reviews;
                 reviews = (
                     <div>
@@ -78,7 +74,6 @@ class ReviewList extends React.Component {
     }
 
     render() {
-        console.log("Render");
         return (
             <div>
                 {this.state.reviewList}
