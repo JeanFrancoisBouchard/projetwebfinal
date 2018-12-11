@@ -5,6 +5,8 @@ import { Card, CardImg, CardText, CardBody,
 import classnames from 'classnames';
 import StarRatings from 'react-star-ratings';
 
+import ReviewList from './ReviewList';
+
 let movieInfo = ({
     Title: "",
     Plot: ""
@@ -91,11 +93,7 @@ class MovieItem extends React.Component {
                         </Nav>
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
-                                <Row>
-                                    <Col sm="12">
-                                        <h4>Voici de belles critiques.</h4>
-                                    </Col>
-                                </Row>
+                                <ReviewList />
                             </TabPane>
                             <TabPane tabId="2">
                                 <Form onSubmit={this.criticSubmission}>
