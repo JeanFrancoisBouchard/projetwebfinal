@@ -2,13 +2,15 @@ import React from 'react';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, CardFooter, Nav, NavItem, NavLink, TabContent, TabPane, Form, FormGroup, Label, Input } from 'reactstrap';
 
-  import classnames from 'classnames';
-  import StarRatings from 'react-star-ratings';
+import classnames from 'classnames';
+import StarRatings from 'react-star-ratings';
 
-  let movieInfo = ({
+let movieInfo = ({
     Title: "",
     Plot: ""
-  });
+});
+
+let movieRoll = 'https://www.clipartsfree.net/svg/62766-movie-roll-vector.svg';
 
 class MovieItem extends React.Component {
     constructor(props) {
@@ -62,7 +64,7 @@ class MovieItem extends React.Component {
             <Row>
                 <Col sm="6" md={{ size: 6, offset: 3 }}>
                     <Card inverse style={{ backgroundColor: '#333', borderColor: '#333', width: "350px",  height: "100%"}}>
-                        <CardImg  style={{height: '300px', width: '100%'}} top width="100%" height="100%" src={this.props.image} alt="Movie poster" />
+                        <CardImg  style={{height: '300px', width: '100%'}} top width="100%" height="100%" src={this.props.image === 'N/A' ? movieRoll : this.props.image} alt="Movie poster" />
                         <CardBody>
                             <CardTitle tag="h3">{this.props.title}</CardTitle>
                             <CardSubtitle>{this.props.year}</CardSubtitle>
