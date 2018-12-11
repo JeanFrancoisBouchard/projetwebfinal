@@ -1,7 +1,7 @@
 import React from 'react';
 import MovieItem from './MovieItem';
 
-import { Row, Col, CardDeck } from 'reactstrap';
+import { Row, Col } from 'reactstrap';
 
 let movieList;
 let movies;

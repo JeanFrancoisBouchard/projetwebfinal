@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-
+import * as ROLES from '../../constants/roles';
 import { SignUpLink } from '../SignUp';
 import { PasswordForgetLink} from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import { Button, Container, Col, Card, CardImg, CardBody, CardTitle, Input } from 'reactstrap';
+
 const SignInPage = () => (
   <div>
   <Container>
@@ -15,6 +16,11 @@ const SignInPage = () => (
         <CardBody>
           <CardTitle>Connexion</CardTitle>
           <SignInForm />
+          <br />
+          <SignInGoogle />
+          <br />
+          <SignInFacebook />
+          <br />
           <PasswordForgetLink />
           <SignUpLink />
         </CardBody>
@@ -89,7 +95,96 @@ class SignInFormBase extends Component {
   }
 }
 
+class SignInGoogleBase extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { error: null };
+  }
+
+  onSubmit = event => {
+    this.props.firebase
+      .doSignInWithGoogle()
+      .then(socialAuthUser => {
+        const roles = ROLES.USER;
+        return this.props.firebase
+          .user(socialAuthUser.user.uid)
+          .set({
+            username: socialAuthUser.user.displayName,
+            email: "Connexion par réseau social",
+            roles: roles,
+          });
+      })
+      .then(() => {
+        this.setState({ error: null });
+        this.props.history.push(ROUTES.HOME);
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
+
+  render() {
+    const { error } = this.state;
+
+    return (
+      <form onSubmit={this.onSubmit}>
+        <Button type="submit">Se connecter avec google</Button>
+
+        {error && <p>{error.message}</p>}
+      </form>
+    );
+  }
+}
+
+class SignInFacebookBase extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { error: null };
+  }
+
+  onSubmit = event => {
+    this.props.firebase
+      .doSignInWithFacebook()
+      .then(socialAuthUser => {
+        return this.props.firebase
+          .user(socialAuthUser.user.uid)
+          .set({
+            username: socialAuthUser.additionalUserInfo.profile.name,
+            email: "Connexion par réseau social",
+            roles: ROLES.USER,
+          });
+      })
+      .then(() => {
+        this.setState({ error: null });
+        this.props.history.push(ROUTES.HOME);
+      })
+      .catch(error => {
+        this.setState({ error });
+      });
+
+    event.preventDefault();
+  };
+
+  render() {
+    const { error } = this.state;
+
+    return (
+      <form onSubmit={this.onSubmit}>
+        <Button type="submit">Sign In with Facebook</Button>
+
+        {error && <p>{error.message}</p>}
+      </form>
+    );
+  }
+}
+
+const SignInFacebook = withRouter(withFirebase(SignInFacebookBase));
+const SignInGoogle = withRouter(withFirebase(SignInGoogleBase));
 const SignInForm = withRouter(withFirebase(SignInFormBase));
 
 export default SignInPage;
-export { SignInForm };
+export { SignInForm, SignInGoogle, SignInFacebook };
