@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container, Row, Col} from 'reactstrap';
+import {Row, Col, Card, CardText, CardBody, CardTitle} from 'reactstrap';
 import Maps from './maps';
 
 import {
@@ -80,33 +80,68 @@ class AboutPage extends Component {
       );
     });
 
+    const info = () => {
+      return(
+            <Card>
+              <CardBody>
+                <CardTitle>Heure d'ouverture</CardTitle>
+                <CardText>
+                  <strong>Lundi : </strong> De 17h à minuit <br />
+                  <strong>Mardi : </strong> De 17h à minuit <br />
+                  <strong>Mercredi : </strong> De 17h à minuit <br />
+                  <strong>Jeudi : </strong> Off, on s'en va au buffet <br />
+                  <strong>Vendredi : </strong> De 17h à minuit <br />
+                  <strong>Samedi : </strong> De 17h à minuit <br />
+                  <strong>Dimanche : </strong> De 17h à minuit <br />
+                </CardText>
+              </CardBody>
+            </Card>
+      );
+    }
+
+    const contact = () => {
+      return(
+        <Card>
+          <CardBody>
+            <CardTitle>Pour se rendre :</CardTitle>
+            <CardText>
+              6863 rue Alfred-Pellan <br />
+              G6Y 8X7 Lévis, Québec <br />
+              Canada
+            </CardText>
+          </CardBody>
+        </Card>
+      );
+    }
+
     return (
-      <div>
-        <Container>
-          <Row>
-            <Col md={{size: "auto", offset: 1}}>
-              <Carousel
-                activeIndex={activeIndex}
-                next={this.next}
-                previous={this.previous}
-                >
-                <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-                {slides}
-                <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-                <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-              </Carousel>
-            </Col>
-          </Row>
-        </Container>      
+      <div className="float">
+        <Row>
+          <Col xs="auto">
+            <Carousel
+              activeIndex={activeIndex}
+              next={this.next}
+              previous={this.previous}
+              >
+              <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+              {slides}
+              <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+              <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+            </Carousel>
+          </Col>
+          <Col xs="auto">
+              <Maps/>
+          </Col>
+        </Row>
         <br />
         <Row>
-            <Col md={{size: "auto", offset: 1}}>
-              <Maps />
+            <Col xs="auto">
+              {info()}
+            </Col>
+            <Col xs="auto">
+              {contact()}
             </Col>
         </Row>
-            
-        
-        
       </div>
     );
   }
