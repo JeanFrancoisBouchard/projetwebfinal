@@ -93,24 +93,11 @@ class AboutPage extends Component {
                   <strong>Vendredi : </strong> De 17h à minuit <br />
                   <strong>Samedi : </strong> De 17h à minuit <br />
                   <strong>Dimanche : </strong> De 17h à minuit <br />
-                </CardText>
+                </CardText> <br />
+                <CardTitle>Coût</CardTitle>
+                <CardText><strong>20 $ </strong>pour les adultes <br /> <strong>10 $ </strong>pour les enfants <br /><strong> Gratuit </strong>pour les enfants ce Jeudi</CardText>
               </CardBody>
             </Card>
-      );
-    }
-
-    const contact = () => {
-      return(
-        <Card>
-          <CardBody>
-            <CardTitle>Pour se rendre :</CardTitle>
-            <CardText>
-              6863 rue Alfred-Pellan <br />
-              G6Y 8X7 Lévis, Québec <br />
-              Canada
-            </CardText>
-          </CardBody>
-        </Card>
       );
     }
 
@@ -118,7 +105,7 @@ class AboutPage extends Component {
       <div>
         <Column flexGrow={1}>
           <Row horizontal='center'>
-            <h1>À propos de nous ...</h1> <br />
+            <h1>À propos de nous ...</h1>
           </Row>
           <Row vertical='center'>
             <Column flexGrow={1} horizontal='center'>
@@ -136,18 +123,11 @@ class AboutPage extends Component {
           </Row>
           <Row vertical='center'>
             <Column flexGrow={1} horizontal='center'>
-              <Maps />
-            </Column>
-          </Row>
-          <Row vertical='center'>
-            <Column flexGrow={1} horizontal='center'></Column>
-            <Column flexGrow={1} horizontal='center'>
               {info()}
             </Column>
             <Column flexGrow={1} horizontal='center'>
-              {contact()}
+              <Maps />
             </Column>
-            <Column flexGrow={1} horizontal='center'></Column> 
           </Row>
         </Column>
       </div>
