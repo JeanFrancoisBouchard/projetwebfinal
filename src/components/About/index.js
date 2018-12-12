@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Container, Row, Col} from 'reactstrap';
-import Map from './map';
+import Maps from './maps';
 
 import {
   Carousel,
@@ -84,7 +84,7 @@ class AboutPage extends Component {
       <div>
         <Container>
           <Row>
-            <Col>
+            <Col md={{size: "auto", offset: 1}}>
               <Carousel
                 activeIndex={activeIndex}
                 next={this.next}
@@ -97,9 +97,16 @@ class AboutPage extends Component {
               </Carousel>
             </Col>
           </Row>
-        </Container>
+        </Container>      
         <br />
-        <Map />
+        <Row>
+            <Col md={{size: "auto", offset: 1}}>
+              <Maps />
+            </Col>
+        </Row>
+            
+        
+        
       </div>
     );
   }
