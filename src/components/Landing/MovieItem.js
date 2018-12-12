@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, CardFooter, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-
+import StarRatings from 'react-star-ratings';
 import classnames from 'classnames';
 
 import ReviewList from './ReviewList';
@@ -19,10 +19,12 @@ class MovieItem extends React.Component {
         super(props);
         this.toggle = this.toggle.bind(this);
         this.changeRating = this.changeRating.bind(this);
+        this.getAverageRating = this.getAverageRating.bind(this);
 
         this.state = ({
             modal: false,
-            rating: 0
+            rating: 0,
+            avgRating: 0
         })
     }
 
@@ -55,7 +57,22 @@ class MovieItem extends React.Component {
             rating: newRating
         });
     }
-    
+
+    async getAverageRating() {
+        const response = await fetch(`http://localhost:8080/WebServices/webresources/Review/GetAverageMovieRating?movieId=${this.props.movieId}`);
+        let json = await response.json();
+
+        if (json[0].averageRating !== 'undefined') {
+            this.setState({
+                avgRating: json[0].averageRating
+            });
+        }
+    }
+
+    componentWillMount() {
+        this.getAverageRating();
+    }
+
     render() {
         return (
             <Row>
@@ -66,7 +83,7 @@ class MovieItem extends React.Component {
                             <CardTitle tag="h3">{this.props.title}</CardTitle>
                             <CardSubtitle>{this.props.year}</CardSubtitle>
                             <CardText>Type: {this.props.type}</CardText>
-                            <Button id={this.props.imdbID} onClick={this.toggle}>Synopsis</Button>
+                            <Button id={this.props.movieId} onClick={this.toggle}>Synopsis</Button>
                             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                                 <ModalHeader toggle={this.toggle}> {movieInfo.Title}</ModalHeader>
                                 <ModalBody>
@@ -76,6 +93,7 @@ class MovieItem extends React.Component {
                                     <Button color="secondary" onClick={this.toggle}>Retour</Button>
                                 </ModalFooter>
                             </Modal>
+                            <StarRatings rating={this.state.avgRating} starRatedColor="yellow" numberOfStars={5}starDimension="30px" starSpacing="10px"/>
                         </CardBody>
                         <CardFooter>
                         <Nav tabs>

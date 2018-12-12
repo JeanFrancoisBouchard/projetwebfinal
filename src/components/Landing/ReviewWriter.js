@@ -2,6 +2,7 @@ import React from 'react';
 import StarRatings from 'react-star-ratings';
 import $ from 'jquery';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
+import {AuthUserContext} from '../Session';
 
 class ReviewWriter extends React.Component {
     constructor(props) {
@@ -29,11 +30,12 @@ class ReviewWriter extends React.Component {
     }
 
 
-    reviewSubmission(event) {
+    reviewSubmission(event, username, uid) {
         if (this.state.rating === 0) {
             event.preventDefault();
         } else {
-            let fetchURL = `http://localhost:8080/WebServices/webresources/Review/CreateReview?movieId=${this.props.movieId}&reviewTxt=${this.state.text}&reviewRating=${this.state.rating}`;
+            console.log(username, uid);
+            let fetchURL = `http://localhost:8080/WebServices/webresources/Review/CreateReview?movieId=${this.props.movieId}&reviewTxt=${this.state.text}&reviewRating=${this.state.rating}&userId=${uid}&userName=${username}`;
             alert(fetchURL);
             fetch(fetchURL)
                 .then(response => {
@@ -55,7 +57,11 @@ class ReviewWriter extends React.Component {
                 <FormGroup>
                     <StarRatings rating={this.state.rating} starRatedColor="blue" changeRating={this.changeRating} numberOfStars={5} name='rating' starDimension="20px" starSpacing="2px"/>
                 </FormGroup>
-                <Button onClick={this.reviewSubmission}>Soumettre critique.</Button>
+                <AuthUserContext.Consumer>
+                    {authUser =>
+                    <Button onClick={(e) => this.reviewSubmission(e, authUser.username, authUser.uid)}>Soumettre critique.</Button>
+                    }
+                </AuthUserContext.Consumer>
             </form>
         );
     }

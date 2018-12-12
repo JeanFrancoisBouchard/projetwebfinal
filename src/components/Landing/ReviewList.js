@@ -1,7 +1,7 @@
 import React from 'react';
 import ReviewItem from './ReviewItem';
 import _ from 'lodash';
-import StarRatings from 'react-star-ratings';
+
 
 
 class ReviewList extends React.Component {
@@ -16,11 +16,14 @@ class ReviewList extends React.Component {
     }
 
     async populateReviews(movieId) {
-        const response = await fetch(`http://localhost:8080/WebServices/webresources/Review/GetReviewById?movieId=${movieId}`);
+        const response = await fetch(`http://localhost:8080/WebServices/webresources/Review/GetReviewByMovieId?movieId=${movieId}`);
         let reviews = await response.json();
 
         const element = reviews.map((review) => 
-            <ReviewItem rating={review.reviewRating} reviewText={review.reviewTxt}/>
+            <div>
+                <ReviewItem rating={review.reviewRating} reviewText={review.reviewTxt} userName={review.userName} />
+                <hr />
+            </div>
         );
 
         this.setState({
