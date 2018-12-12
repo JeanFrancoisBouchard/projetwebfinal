@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import {Row, Col, Card, CardText, CardBody, CardTitle} from 'reactstrap';
+import {Card, CardText, CardBody, CardTitle} from 'reactstrap';
 import Maps from './maps';
-
+import {Column, Row} from 'simple-flexbox';
 import {
   Carousel,
   CarouselItem,
@@ -115,33 +115,41 @@ class AboutPage extends Component {
     }
 
     return (
-      <div className="float">
-        <Row>
-          <Col xs="auto">
-            <Carousel
-              activeIndex={activeIndex}
-              next={this.next}
-              previous={this.previous}
-              >
-              <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
-              {slides}
-              <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
-              <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
-            </Carousel>
-          </Col>
-          <Col xs="auto">
-              <Maps/>
-          </Col>
-        </Row>
-        <br />
-        <Row>
-            <Col xs="auto">
+      <div>
+        <Column flexGrow={1}>
+          <Row horizontal='center'>
+            <h1>À propos de nous ...</h1> <br />
+          </Row>
+          <Row vertical='center'>
+            <Column flexGrow={1} horizontal='center'>
+              <Carousel
+                activeIndex={activeIndex}
+                next={this.next}
+                previous={this.previous}
+                >
+                <CarouselIndicators items={items} activeIndex={activeIndex} onClickHandler={this.goToIndex} />
+                {slides}
+                <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
+                <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
+              </Carousel> 
+            </Column>           
+          </Row>
+          <Row vertical='center'>
+            <Column flexGrow={1} horizontal='center'>
+              <Maps /> <br />
+            </Column>
+          </Row>
+          <Row vertical='center'>
+            <Column flexGrow={1} horizontal='center'></Column>
+            <Column flexGrow={1} horizontal='center'>
               {info()}
-            </Col>
-            <Col xs="auto">
+            </Column>
+            <Column flexGrow={1} horizontal='center'>
               {contact()}
-            </Col>
-        </Row>
+            </Column>
+            <Column flexGrow={1} horizontal='center'></Column> 
+          </Row>
+        </Column>
       </div>
     );
   }

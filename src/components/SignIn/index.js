@@ -6,13 +6,14 @@ import { PasswordForgetLink} from '../PasswordForget';
 import { withFirebase } from '../Firebase';
 import * as ROUTES from '../../constants/routes';
 import { Button, Container, Col, Card, CardImg, CardBody, CardTitle, Input } from 'reactstrap';
+import Logo from '../SignIn/6863.png';
 
 const SignInPage = () => (
   <div>
   <Container>
     <Col sm="10" md={{ size: 8, offset: 2 }}>
       <Card>
-        <CardImg top width="100%" src="https://placeholdit.imgix.net/~text?txtsize=33&txt=318%C3%97180&w=318&h=180" alt="Logo" />
+        <CardImg top width="100%" src={Logo} alt="Logo" />
         <CardBody>
           <CardTitle>Connexion</CardTitle>
           <SignInForm />
