@@ -132,11 +132,11 @@ class AboutPage extends Component {
                 <CarouselControl direction="prev" directionText="Previous" onClickHandler={this.previous} />
                 <CarouselControl direction="next" directionText="Next" onClickHandler={this.next} />
               </Carousel> 
-            </Column>           
+            </Column>     
           </Row>
           <Row vertical='center'>
             <Column flexGrow={1} horizontal='center'>
-              <Maps /> <br />
+              <Maps />
             </Column>
           </Row>
           <Row vertical='center'>
