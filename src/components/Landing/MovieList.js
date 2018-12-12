@@ -54,7 +54,7 @@ class MovieList extends React.Component {
                             <Col md={{ size: 'auto', offset: 2 }}>
                                 <CardDeck>
                                     {slice.map((movie) =>
-                                        <MovieItem imdbID={movie.imdbID} title={movie.Title} image={movie.Poster} type={movie.Type} year={movie.Year}/>
+                                        <MovieItem movieId={movie.imdbID} title={movie.Title} image={movie.Poster} type={movie.Type} year={movie.Year}/>
                                     )}
                                 </CardDeck>
                             </Col>

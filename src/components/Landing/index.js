@@ -1,6 +1,7 @@
 import React from 'react';
 import MovieList from './MovieList';
 import {Col, Row, Input, Form, Button} from 'reactstrap';
+import  { AuthUserContext } from '../Session';
 
 class Landing extends React.Component {
   constructor(props) {
@@ -34,7 +35,7 @@ class Landing extends React.Component {
           </Col>
         </Row>
         <hr />
-        <MovieList searchInput={this.state.searchInput}/>
+        <MovieList  searchInput={this.state.searchInput}/>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import StarRatings from 'react-star-ratings';
-
+import $ from 'jquery';
 import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
 
 class ReviewWriter extends React.Component {
@@ -28,19 +28,26 @@ class ReviewWriter extends React.Component {
         this.setState({rating});
     }
 
+
     reviewSubmission(event) {
         if (this.state.rating === 0) {
-            alert("Vous devez entrer une note.");
             event.preventDefault();
         } else {
-            const jsonData = {"text": this.state.text, "rating": this.state.rating, "movieId": this.props.movieId};
-            window.location.reload();
+            let fetchURL = `http://localhost:8080/WebServices/webresources/Review/CreateReview?movieId=${this.props.movieId}&reviewTxt=${this.state.text}&reviewRating=${this.state.rating}`;
+            alert(fetchURL);
+            fetch(fetchURL)
+                .then(response => {
+                    this.setState({
+                        rating: 0,
+                        text: ''
+                    })
+                });
         }
     }
 
     render() {
         return (
-            <Form onSubmit={this.reviewSubmission}>
+            <form>
                 <FormGroup>
                     <Label for="exampleText">Votre critique.</Label>
                     <Input type="textarea" name="text" id="exampleText" value={this.state.text} onChange={evt => this.setState({text: evt.target.value})}/>
@@ -48,8 +55,8 @@ class ReviewWriter extends React.Component {
                 <FormGroup>
                     <StarRatings rating={this.state.rating} starRatedColor="blue" changeRating={this.changeRating} numberOfStars={5} name='rating' starDimension="20px" starSpacing="2px"/>
                 </FormGroup>
-                <Button>Soumettre critique.</Button>
-            </Form>
+                <Button onClick={this.reviewSubmission}>Soumettre critique.</Button>
+            </form>
         );
     }
 }

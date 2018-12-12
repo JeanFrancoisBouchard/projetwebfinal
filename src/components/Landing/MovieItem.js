@@ -17,7 +17,6 @@ let movieRoll = 'https://www.clipartsfree.net/svg/62766-movie-roll-vector.svg';
 class MovieItem extends React.Component {
     constructor(props) {
         super(props);
-
         this.toggle = this.toggle.bind(this);
         this.changeRating = this.changeRating.bind(this);
 
@@ -56,11 +55,7 @@ class MovieItem extends React.Component {
             rating: newRating
         });
     }
-
-    criticSubmission() {
-        
-    }
-
+    
     render() {
         return (
             <Row>
@@ -93,10 +88,10 @@ class MovieItem extends React.Component {
                         </Nav>
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
-                                <ReviewList/>
+                                <ReviewList movieId={this.props.movieId}/>
                             </TabPane>
                             <TabPane tabId="2">
-                                <ReviewWriter  movieId={this.props.imdbID}/>
+                                <ReviewWriter  movieId={this.props.movieId}/>
                             </TabPane>
                         </TabContent>
                         </CardFooter>

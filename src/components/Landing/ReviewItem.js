@@ -10,7 +10,7 @@ class ReviewItem extends React.Component {
         return (
             <Media>
                 <Media body>
-                    <Media heading>{this.props.username}</Media>
+                    <Media heading>Tès gay</Media>
                     <StarRatings rating={this.props.rating} starRatedColor="yellow" numberOfStars={5}starDimension="30px" starSpacing="10px"/>
                     {this.props.reviewText}
                 </Media>
