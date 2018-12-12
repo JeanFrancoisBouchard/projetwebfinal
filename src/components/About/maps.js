@@ -46,8 +46,8 @@ class Maps extends React.Component{
             <Map
                 style={styleMap}
                 containerStyle={{
-                height: 600,
-                width: 600,
+                height: "100%",
+                width: "100%",
                 zoom: 11.15
                 }}
                 center={[-71.159583,46.809405]}
