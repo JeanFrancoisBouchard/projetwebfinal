@@ -66,6 +66,10 @@ class MovieItem extends React.Component {
             this.setState({
                 avgRating: json[0].averageRating
             });
+        } else {
+            this.setState({
+                avgRating: 0
+            });
         }
     }
 
