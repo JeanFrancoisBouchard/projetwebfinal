@@ -3,10 +3,11 @@ import SignOutButton from '../SignOut';
 import * as ROUTES from '../../constants/routes';
 import * as ROLES from '../../constants/roles';
 import { AuthUserContext } from '../Session';
-import { Button, Jumbotron, Collapse, Navbar, NavbarBrand, 
+import { Button, Jumbotron, Collapse, Navbar, 
   NavbarToggler, Nav, NavItem, NavLink,
   UncontrolledDropdown, DropdownToggle,
   DropdownMenu, DropdownItem } from 'reactstrap';
+import smallLogo from '../Navigation/6863small.png';
 
 class Navigation extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class Navigation extends Component {
         </div>
         <div>
           <Navbar color="light" light expand="md">
-            <NavbarBrand href="/">Ciné au 6863</NavbarBrand>
+            <a href="/"><img alt="6863 Logo" style={{width: '93px', height: '30px'}} src={smallLogo} /></a>
             <NavbarToggler onClick={this.toggleNavbar} />
             <Collapse isOpen={this.state.collapsed} navbar>
               <AuthUserContext.Consumer>
