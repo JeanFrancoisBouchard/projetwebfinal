@@ -31,6 +31,11 @@ const App = () => (
       <Route path={ROUTES.CHANGEPW} component={AccountPage} />
       <Route path={ROUTES.ADMIN} component={AdminPage} />
       <Route path={ROUTES.ABOUT} component={AboutPage} />
+      <nav className="navbar fixed-bottom navbar-light bg-faded">
+            <span className="text-muted">
+              <a className="navbar-brand" href="http://www.lebuffetdescontinents.com/menu">Notre sponsor principal</a>
+            </span>
+      </nav>
       </div>
   </Router>
 );

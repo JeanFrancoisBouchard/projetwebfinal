@@ -1,9 +1,9 @@
 import React from 'react';
 import MovieItem from './MovieItem';
 
-import { Row, Col } from 'reactstrap';
+import { Row, Col, CardDeck } from 'reactstrap';
 
-let movieList;
+let movieList = [];
 let movies;
 
 class MovieList extends React.Component {
@@ -18,36 +18,56 @@ class MovieList extends React.Component {
     request = async (search) => {
         const response = await fetch(`http://www.omdbapi.com/?apikey=c73b10d1&s=${search}&plot=full&r=json`);
         movies = await response.json();
-        console.log(movies);
 
-        console.log("before map");
+        movieList = [];
         if (movies.Search === undefined) {
-            movieList = (
+            const noMovie = (
                 <div>
                     <Row>
                         <Col sm="12" md={{ size: 6, offset: 3 }}>
                             <h3>Il n'y a pas de film sous ce nom.</h3>
                         </Col>
                     </Row>   
-                    <Row>
-                        <Col sm="12" md={{ size: 6, offset: 3 }}>
-                            <h3>Vous êtes définitivement stupide.</h3>
-                        </Col>
-                    </Row>   
                 </div>
             );
+
+            movieList.push(noMovie);
         } else {
-            movieList = movies.Search.map((movie) => 
-                <div>
-                    <MovieItem imdbID={movie.imdbID} title={movie.Title} image={movie.Poster} type={movie.Type} year={movie.Year}/>
-                    <br />
-                </div>
-            );
+
+            const deckNo = Math.ceil(movies.Search.length / 3.0);
+
+            for (let i = 0; i < deckNo; i++) {
+                let slice;
+                if ((i + 1) * 3 >= movies.Search.length) {
+                    slice = movies.Search.slice(i * 3);
+                } else {
+                    slice = movies.Search.slice(i * 3, (i + 1) * 3);
+                }
+
+                const deck = ( 
+                    <div>
+                        <Row>
+                            <Col md={{ size: 'auto', offset: 2 }}>
+                                <CardDeck>
+                                    {slice.map((movie) =>
+                                        <MovieItem movieId={movie.imdbID} title={movie.Title} image={movie.Poster} type={movie.Type} year={movie.Year}/>
+                                    )}
+                                </CardDeck>
+                            </Col>
+                        </Row>
+                        <br />
+                    </div>
+                );
+
+                movieList.push(deck);
+            }
         }
+
+
+        
         this.forceUpdate();
     }
     componentWillReceiveProps(newProps) {
-        console.log(newProps.searchInput);
         let search;
         if (newProps.searchInput === "") {
             search = "Under-Siege";
@@ -57,7 +77,6 @@ class MovieList extends React.Component {
         this.request(search);
     }
     render() {
-        console.log("render");
         return (
             <div>
                 {movieList}
