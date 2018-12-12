@@ -39,10 +39,12 @@ class Maps extends React.Component{
     }
 
     render(){
+        
+        const styleMap = "mapbox://styles/mapbox/streets-v9";
 
         return(
             <Map
-                style={"mapbox://styles/mapbox/streets-v9"}
+                style={styleMap}
                 containerStyle={{
                 height: 600,
                 width: 600,

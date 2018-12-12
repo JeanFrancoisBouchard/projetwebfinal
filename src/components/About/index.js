@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Card, CardText, CardBody, CardTitle} from 'reactstrap';
+import {Card, CardText, CardBody, CardTitle, CardImg} from 'reactstrap';
 import Maps from './maps';
 import {Column, Row} from 'simple-flexbox';
 import {
@@ -80,6 +80,72 @@ class AboutPage extends Component {
       );
     });
 
+    const buffet = () => {
+      return(
+        <Column flexGrow={1} horizontal='center'>
+          <Card>
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" /> 
+            <CardBody>
+              <CardTitle>Repas de ce soir</CardTitle>
+              <CardText>
+                <p>
+                  Nous vous attendons tous ce soir au buffet des 
+                  continents de Lévis au alentour de 18h30 au nom
+                  de Jean-Francesca Bouchard. <br />
+
+                  Merci et oublier pas de jeûner.
+                </p>
+              </CardText>
+            </CardBody>
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://www.petitions24.net/uploads/images/12734280_1682125102035784_3556675732407242158_n.jpg" />
+            <CardImg top width="15%" src="https://thoughtcatalog.files.wordpress.com/2018/03/a-ok.jpg?w=3232&h=2160"/>       
+          </Card>
+        </Column>
+      );
+    }
+
     const info = () => {
       return(
             <Card>
@@ -128,6 +194,9 @@ class AboutPage extends Component {
             <Column flexGrow={1} horizontal='center'>
               <Maps />
             </Column>
+          </Row>
+          <Row vertical='center'>
+            {buffet()}
           </Row>
         </Column>
       </div>
