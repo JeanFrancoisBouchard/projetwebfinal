@@ -41,7 +41,7 @@ class Navigation extends Component {
         </DropdownToggle>
         <DropdownMenu right>
           <DropdownItem href={ROUTES.HOME}>
-            Compte utilisateur
+            Gérer mes critiques
           </DropdownItem>
           <DropdownItem href={ROUTES.CHANGEPW}>
             Changer le mot de passe

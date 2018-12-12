@@ -1,9 +1,7 @@
 import React from 'react';
 import { Card, CardImg, CardText, CardBody,
   CardTitle, CardSubtitle, Button, Row, Col, Modal, ModalHeader, ModalBody, ModalFooter, CardFooter, Nav, NavItem, NavLink, TabContent, TabPane } from 'reactstrap';
-import StarRatings from 'react-star-ratings';
 import classnames from 'classnames';
-
 import ReviewList from './ReviewList';
 import ReviewWriter from './ReviewWriter';
 
@@ -17,17 +15,16 @@ let movieRoll = 'https://www.clipartsfree.net/svg/62766-movie-roll-vector.svg';
 class MovieItem extends React.Component {
     constructor(props) {
         super(props);
+
         this.toggle = this.toggle.bind(this);
         this.changeRating = this.changeRating.bind(this);
-        this.getAverageRating = this.getAverageRating.bind(this);
 
         this.state = ({
             modal: false,
             rating: 0,
-            avgRating: 0
         })
     }
-
+  
     request = async (id) => {
         const response = await fetch(`http://www.omdbapi.com/?apikey=c73b10d1&i=${id}&plot=full&r=json`);
         const movie = await response.json();
@@ -58,25 +55,6 @@ class MovieItem extends React.Component {
         });
     }
 
-    async getAverageRating() {
-        const response = await fetch(`http://localhost:8080/WebServices/webresources/Review/GetAverageMovieRating?movieId=${this.props.movieId}`);
-        let json = await response.json();
-
-        if (json[0].averageRating !== 'undefined') {
-            this.setState({
-                avgRating: json[0].averageRating
-            });
-        } else {
-            this.setState({
-                avgRating: 0
-            });
-        }
-    }
-
-    componentWillMount() {
-        this.getAverageRating();
-    }
-
     render() {
         return (
             <Row>
@@ -90,14 +68,13 @@ class MovieItem extends React.Component {
                             <Button id={this.props.movieId} onClick={this.toggle}>Synopsis</Button>
                             <Modal isOpen={this.state.modal} toggle={this.toggle} className={this.props.className}>
                                 <ModalHeader toggle={this.toggle}> {movieInfo.Title}</ModalHeader>
-                                <ModalBody>
+                                <ModalBody className="text-justify">
                                     {movieInfo.Plot}
                                 </ModalBody>
                                 <ModalFooter>
                                     <Button color="secondary" onClick={this.toggle}>Retour</Button>
                                 </ModalFooter>
                             </Modal>
-                            <StarRatings rating={this.state.avgRating} starRatedColor="yellow" numberOfStars={5}starDimension="30px" starSpacing="10px"/>
                         </CardBody>
                         <CardFooter>
                         <Nav tabs>
@@ -105,15 +82,17 @@ class MovieItem extends React.Component {
                                 <NavLink className={classnames({ active: this.state.activeTab === '1' })} onClick={() => { this.toggleTabs('1'); }} > Critiques </NavLink>
                             </NavItem>
                             <NavItem>
-                            <NavLink className={classnames({ active: this.state.activeTab === '2' })} onClick={() => { this.toggleTabs('2'); }}> Écrire votre critique </NavLink>
+                                <NavLink className={classnames({ active: this.state.activeTab === '2' })} onClick={() => { this.toggleTabs('2'); }}> Écrire votre critique </NavLink>
                             </NavItem>
                         </Nav>
                         <TabContent activeTab={this.state.activeTab}>
                             <TabPane tabId="1">
+                                <br />
                                 <ReviewList movieId={this.props.movieId}/>
                             </TabPane>
                             <TabPane tabId="2">
-                                <ReviewWriter  movieId={this.props.movieId}/>
+                                <br />
+                                <ReviewWriter  movieTitle={this.props.title} movieId={this.props.movieId}/>
                             </TabPane>
                         </TabContent>
                         </CardFooter>

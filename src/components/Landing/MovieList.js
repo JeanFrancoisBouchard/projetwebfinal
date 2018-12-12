@@ -28,16 +28,12 @@ class MovieList extends React.Component {
                             <h3>Il n'y a pas de film sous ce nom.</h3>
                         </Col>
                     </Row>   
-                    <Row>
-                        <Col sm="12" md={{ size: 6, offset: 3 }}>
-                            <h3>Vous êtes définitivement stupide.</h3>
-                        </Col>
-                    </Row>   
                 </div>
             );
 
             movieList.push(noMovie);
         } else {
+
             const deckNo = Math.ceil(movies.Search.length / 3.0);
 
             for (let i = 0; i < deckNo; i++) {

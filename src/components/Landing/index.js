@@ -1,36 +1,39 @@
 import React from 'react';
 import MovieList from './MovieList';
 import {Col, Row, Input, Form, Button} from 'reactstrap';
-import  { AuthUserContext } from '../Session';
 
 class Landing extends React.Component {
   constructor(props) {
     super(props);
 
-    this.onSearchSubmit = this.onSearchSubmit.bind(this);
     this.state= ({
-      searchValue: '',
       searchInput: ''
     });
   }
 
-
-  onSearchSubmit(e) { 
-    const search = this.state.searchValue;
+  onSubmit = event => {
     this.setState({
-      searchInput: search
+      searchInput: event.target.elements.search.value
     });
+    event.preventDefault();
   }
 
+  onChange = event => {
+    this.setState({ searchValue: event.target.value });
+  }
 
   render() {
     return (
       <div>
         <Row>
           <Col sm="12" md={{ size: 6, offset: 5 }}>
-            <Form inline>
-              <Input type="text" name="search" id="searchInputId" placeholder="Rechercher un film..." value={this.state.searchValue} onChange={evt => this.setState({searchValue: evt.target.value})}/>
-              <Button color="primary" onClick={this.onSearchSubmit}>Rechercher</Button> 
+            <Form inline onSubmit={this.onSubmit}>
+              <Input 
+                type="text" 
+                name="search" 
+                id="searchInputId" 
+                placeholder="Rechercher un film..." />
+              <Button type="submit" color="primary">Rechercher</Button> 
             </Form>
           </Col>
         </Row>

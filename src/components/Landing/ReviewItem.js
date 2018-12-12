@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {Media} from 'reactstrap';
+import { Card, CardBody, CardSubtitle, CardTitle } from 'reactstrap';
 
 import StarRatings from 'react-star-ratings';
 
@@ -8,13 +8,17 @@ import StarRatings from 'react-star-ratings';
 class ReviewItem extends React.Component {
     render() {
         return (
-            <Media>
-                <Media body>
-                    <Media heading>{this.props.userName}</Media>
+            <Card color="dark" inverse>
+                <CardTitle>
+                    {this.props.userName}
+                </CardTitle>
+                <CardSubtitle>
                     <StarRatings rating={this.props.rating} starRatedColor="yellow" numberOfStars={5}starDimension="30px" starSpacing="10px"/>
+                </CardSubtitle>
+                <CardBody className="text-justify">
                     {this.props.reviewText}
-                </Media>
-            </Media>
+                </CardBody>
+            </Card>
         );
     }
 }

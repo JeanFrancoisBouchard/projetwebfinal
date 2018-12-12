@@ -1,8 +1,8 @@
 import React from 'react';
 import StarRatings from 'react-star-ratings';
-import $ from 'jquery';
-import {Form, FormGroup, Label, Input, Button} from 'reactstrap';
-import {AuthUserContext} from '../Session';
+import { FormGroup, Label, Input, Button } from 'reactstrap';
+import { AuthUserContext } from '../Session';
+import * as ROUTES from '../../constants/routes';
 
 class ReviewWriter extends React.Component {
     constructor(props) {
@@ -34,9 +34,8 @@ class ReviewWriter extends React.Component {
         if (this.state.rating === 0) {
             event.preventDefault();
         } else {
-            console.log(username, uid);
-            let fetchURL = `http://localhost:8080/WebServices/webresources/Review/CreateReview?movieId=${this.props.movieId}&reviewTxt=${this.state.text}&reviewRating=${this.state.rating}&userId=${uid}&userName=${username}`;
-            alert(fetchURL);
+
+            let fetchURL = `http://localhost:8080/WebServices/webresources/Review/CreateReview?movieId=${this.props.movieId}&reviewTxt=${this.state.text}&reviewRating=${this.state.rating}&userId=${uid}&userName=${username}&movieTitle=${this.props.movieTitle}`;
             fetch(fetchURL)
                 .then(response => {
                     this.setState({
@@ -47,7 +46,7 @@ class ReviewWriter extends React.Component {
         }
     }
 
-    render() {
+    authReview(authUser) {
         return (
             <form>
                 <FormGroup>
@@ -57,12 +56,29 @@ class ReviewWriter extends React.Component {
                 <FormGroup>
                     <StarRatings rating={this.state.rating} starRatedColor="blue" changeRating={this.changeRating} numberOfStars={5} name='rating' starDimension="20px" starSpacing="2px"/>
                 </FormGroup>
-                <AuthUserContext.Consumer>
-                    {authUser =>
-                    <Button onClick={(e) => this.reviewSubmission(e, authUser.username, authUser.uid)}>Soumettre critique.</Button>
-                    }
-                </AuthUserContext.Consumer>
+                <Button onClick={(e) => this.reviewSubmission(e, authUser.username, authUser.uid)}>Soumettre critique.</Button>
             </form>
+        );
+    }
+    
+    nonAuthReview() {
+        return(
+            <div>
+                <p>
+                    Vous devez être connecté pour écrire une critique
+                </p>
+                <a href={ROUTES.SIGN_IN}>Se connecter</a>
+            </div>    
+        );
+    }
+
+    render() {
+        return (
+            <AuthUserContext.Consumer>
+                {authUser =>
+                    authUser ? this.authReview(authUser) : this.nonAuthReview()
+                }
+            </AuthUserContext.Consumer>
         );
     }
 }

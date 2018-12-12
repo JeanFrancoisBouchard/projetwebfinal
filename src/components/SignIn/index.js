@@ -174,7 +174,7 @@ class SignInFacebookBase extends Component {
 
     return (
       <form onSubmit={this.onSubmit}>
-        <Button type="submit">Sign In with Facebook</Button>
+        <Button type="submit">Se connecter avec Facebook</Button>
 
         {error && <p>{error.message}</p>}
       </form>
